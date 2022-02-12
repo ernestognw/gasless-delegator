@@ -1,0 +1,12 @@
+## Gasless Token (ERC20 Vote)
+
+A simplified ERC20 Vote token that allow people to claim 150 tokens.
+
+⚠️⚠️ WARNING: This is NOT suitable for production as it doesn't validate elegibility for an airdrop. ⚠️⚠️
+
+### Deploy
+
+1. Copy `.env.sample` to `.env` file and fill with the information required (you can ignore INFURA_PROJECT_ID if you're providing a custom chain)
+2. Configure the network of your preference in `hardhat.config.ts`, it goerli already configured as a default
+3. Fund the deployer account
+4. Run `yarn deploy:token --network <your-network>`
