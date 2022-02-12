@@ -1,0 +1,32 @@
+.textContainer {
+  max-width: 560px;
+  text-align: center;
+  color: rgb(113, 113, 113);
+}
+
+.balance {
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.inputContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.redelegateInput {
+  width: 100%;
+  padding: 1.1rem;
+  background-color: white;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.redelegateButton {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  height: 100%
+}
