@@ -16,7 +16,7 @@ contract GaslessToken is ERC20, ERC20Permit, ERC20Votes {
      * @dev Constructor.
      */
     constructor() ERC20("GaslessToken", "GSLS") ERC20Permit("GaslessToken") {
-        _mint(address(this), 15000000);
+        _mint(address(this), 15000000 * 10**decimals());
     }
 
     /**
@@ -26,7 +26,7 @@ contract GaslessToken is ERC20, ERC20Permit, ERC20Votes {
      */
     function claimTokens(address delegate) external {
         address claimer = _msgSender();
-        uint8 amount = 150;
+        uint256 amount = 150 * 10**decimals();
 
         require(!claimed[claimer], "GSLS: Tokens already claimed.");
 

@@ -2,13 +2,15 @@
   "name": "gasless-token",
   "license": "AGPL-3.0-only",
   "scripts": {
-    "deploy:token": "hardhat run scripts/deploy.ts"
+    "deploy": "hardhat run scripts/deploy.ts",
+    "verify": "hardhat verify"
   },
   "dependencies": {
     "hardhat": "^2.8.4"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
+    "@nomiclabs/hardhat-etherscan": "^3.0.1",
     "@openzeppelin/contracts": "^4.5.0",
     "dotenv": "^16.0.0",
     "ethers": "^5.5.4",
