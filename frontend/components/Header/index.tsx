@@ -1,8 +1,32 @@
 import Link from "next/link";
+import { useWallet } from "@web3-ui/core";
 import Image from "next/image";
 import styles from "styles/components/Header.module.css";
 
 const Header = () => {
+  const {
+    connected,
+    connectWallet,
+    correctNetwork,
+    disconnectWallet,
+    switchToCorrectNetwork,
+  } = useWallet();
+
+  let buttonProps: ButtonProps = {
+    onClick: connectWallet,
+    children: "Connect wallet",
+  };
+
+  if (connected) {
+    if (!correctNetwork) {
+      buttonProps.onClick = switchToCorrectNetwork;
+      buttonProps.children = "Switch to correct network";
+    }
+
+    buttonProps.onClick = disconnectWallet;
+    buttonProps.children = "Disconnect";
+  }
+
   return (
     <div className={styles.header}>
       <Link href="/">
@@ -17,7 +41,7 @@ const Header = () => {
         </a>
       </Link>
       <div>
-        <button onClick={() => {}}>Connect wallet</button>
+        <button {...buttonProps} />
       </div>
     </div>
   );

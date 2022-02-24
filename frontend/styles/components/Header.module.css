@@ -6,16 +6,6 @@
   align-items: center;
 }
 
-.connectButton:hover {
-  transform: translateY(-1px);
-  filter: brightness(1.05);
-}
-
-.connectButton:active {
-  transform: translateY(0px);
-  filter: brightness(1);
-}
-
 @media screen and (max-width: 728px) {
   .header {
     padding: 2rem 1rem;

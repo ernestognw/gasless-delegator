@@ -19,7 +19,7 @@
 
 .redelegateInput {
   width: 100%;
-  padding: 1.1rem;
+  padding: 1rem;
   background-color: white;
   border-top-left-radius: 12px;
   border-bottom-left-radius: 12px;
@@ -28,5 +28,4 @@
 .redelegateButton {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-  height: 100%
 }
