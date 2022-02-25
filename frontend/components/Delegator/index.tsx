@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTokenBalance, useWallet, NETWORKS } from "@web3-ui/core";
 import { useWriteContract } from "@web3-ui/hooks";
 import { GSLSToken } from "config/abis";
-import { tokenAddress } from "config/environment";
+import { autotaskWebhookUri, tokenAddress } from "config/environment";
 import useTruncatedAddress from "hooks/useTruncatedAddress";
 import styles from "styles/components/Delegator.module.css";
 import { ethers } from "ethers";
@@ -10,6 +10,8 @@ import { ethers } from "ethers";
 const SEVEN_DAYS = 60 * 60 * 24 * 7;
 
 const Delegator = () => {
+  const [transactionHash, setTransactionHash] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const [delegate, setDelegate] = useState<string>("");
   const [newDelegate, setNewDelegate] = useState<string>("");
   const { connection, correctNetwork, connected } = useWallet();
@@ -23,32 +25,36 @@ const Delegator = () => {
     GSLSToken
   );
 
-  useEffect(() => {
-    const getDelegate = async () => {
-      if (GSLSTokenContract && connection.userAddress && correctNetwork) {
-        try {
-          const delegateFound = await GSLSTokenContract.delegates(
-            connection.userAddress
-          );
-          setDelegate(delegateFound);
-        } catch (err) {
-          // Can't completely avoid this error as it is needed to access @web3-ui internals
-          // to correctly handle network change
-          console.log(err); // Logged so it doesn't throw
-        }
-      } else {
-        setDelegate("{{delegate}}");
+  const getDelegate = useCallback(async () => {
+    if (GSLSTokenContract && connection.userAddress && correctNetwork) {
+      try {
+        const delegateFound = await GSLSTokenContract.delegates(
+          connection.userAddress
+        );
+        setDelegate(delegateFound);
+      } catch (err) {
+        // Can't completely avoid this error as it is needed to access @web3-ui internals
+        // to correctly handle network change
+        console.log(err); // Logged so it doesn't throw
       }
-    };
+    } else {
+      setDelegate("{{delegate}}");
+    }
+  }, [GSLSTokenContract, connection, correctNetwork]);
+
+  useEffect(() => {
     getDelegate();
-  }, [GSLSTokenContract, connection, correctNetwork, isReady]);
+  }, [getDelegate]);
 
   const signDelegation = async () => {
     if (!connection.signer) {
       alert("Please connect your wallet first");
+      return;
     } else if (!ethers.utils.isAddress(newDelegate)) {
       alert("Please specify a valid address");
+      return;
     } else {
+      setLoading(true);
       const domain = {
         name: "Gasless Delegator",
         version: "1",
@@ -76,8 +82,25 @@ const Delegator = () => {
         value
       );
 
-      // TODO: Send to Autotask
-      console.log(signature);
+      const res = await fetch(autotaskWebhookUri!, {
+        method: "POST",
+        body: JSON.stringify({
+          ...value,
+          signature,
+        }),
+      });
+
+      const actualResponse = await res.json();
+
+      console.log(actualResponse);
+      if (res.status === 200 && actualResponse.status != "error") {
+        alert("Redelegation sent to relayer");
+        setTransactionHash(JSON.parse(actualResponse.result).transactionHash);
+      } else {
+        alert(actualResponse.message ?? "An error has occurred");
+      }
+
+      setLoading(false);
     }
   };
 
@@ -101,10 +124,24 @@ const Delegator = () => {
           type="text"
           placeholder="Input your new delegate (0x...)"
         />
-        <button onClick={signDelegation} className={styles.redelegateButton}>
-          Delegate
+        <button
+          disabled={loading}
+          onClick={signDelegation}
+          className={styles.redelegateButton}
+        >
+          {loading ? "Sending..." : "Delegate"}
         </button>
       </div>
+      {transactionHash && (
+        <div className={styles.viewTransaction}>
+          <a
+            href={`https://${connection.network}.etherscan.io/tx/${transactionHash}`}
+            target="__blank"
+          >
+            View transaction
+          </a>
+        </div>
+      )}
     </div>
   );
 };

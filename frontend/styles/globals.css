@@ -25,6 +25,11 @@ button {
   font-weight: bold;
 }
 
+button:disabled {
+  background: #ecf4ff !important;
+  color:rgb(114, 152, 248) !important;
+}
+
 p {
   margin: 0 !important;
 }

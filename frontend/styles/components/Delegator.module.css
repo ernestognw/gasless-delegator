@@ -33,3 +33,9 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
+
+.viewTransaction {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
