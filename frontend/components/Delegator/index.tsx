@@ -56,7 +56,7 @@ const Delegator = () => {
     } else {
       setLoading(true);
       const domain = {
-        name: "Gasless Delegator",
+        name: "GaslessToken",
         version: "1",
         chainId: (NETWORKS as { [key: string]: number })[connection.network],
         verifyingContract: tokenAddress,
