@@ -1,5 +1,5 @@
 .textContainer {
-  max-width: 560px;
+  max-width: 500px;
   text-align: center;
   color: rgb(113, 113, 113);
 }
@@ -7,6 +7,10 @@
 .balance {
   font-size: 25px;
   margin-bottom: 10px;
+}
+
+.address {
+  font-size: 30px;
 }
 
 .inputContainer {

@@ -12,32 +12,43 @@ const SEVEN_DAYS = 60 * 60 * 24 * 7;
 const Delegator = () => {
   const [delegate, setDelegate] = useState<string>("");
   const [newDelegate, setNewDelegate] = useState<string>("");
-  const { connection } = useWallet();
+  const { connection, correctNetwork, connected } = useWallet();
   const { formattedBalance } = useTokenBalance({
-    tokenAddress: tokenAddress!,
+    tokenAddress: correctNetwork ? tokenAddress! : "",
     accountAddress: connection.userAddress!,
   });
   const truncatedAddress = useTruncatedAddress(connection.userAddress);
-  const [GSLSTokenContract] = useWriteContract(tokenAddress!, GSLSToken);
+  const [GSLSTokenContract, isReady] = useWriteContract(
+    tokenAddress!,
+    GSLSToken
+  );
 
   useEffect(() => {
     const getDelegate = async () => {
-      if (GSLSTokenContract && connection.userAddress) {
-        const delegateFound = await GSLSTokenContract.delegates(
-          connection.userAddress
-        );
-        setDelegate(delegateFound);
+      if (GSLSTokenContract && connection.userAddress && correctNetwork) {
+        try {
+          const delegateFound = await GSLSTokenContract.delegates(
+            connection.userAddress
+          );
+          setDelegate(delegateFound);
+        } catch (err) {
+          // Can't completely avoid this error as it is needed to access @web3-ui internals
+          // to correctly handle network change
+          console.log(err); // Logged so it doesn't throw
+        }
       } else {
         setDelegate("{{delegate}}");
       }
     };
     getDelegate();
-  }, [GSLSTokenContract, connection]);
+  }, [GSLSTokenContract, connection, correctNetwork, isReady]);
 
   const signDelegation = async () => {
-    if (!ethers.utils.isAddress(newDelegate)) {
+    if (!connection.signer) {
+      alert("Please connect your wallet first");
+    } else if (!ethers.utils.isAddress(newDelegate)) {
       alert("Please specify a valid address");
-    } else if (connection.signer) {
+    } else {
       const domain = {
         name: "Gasless Delegator",
         version: "1",
@@ -76,7 +87,7 @@ const Delegator = () => {
         <p className={styles.balance}>
           Hello <b>{connection.ens || truncatedAddress || "{address}"}</b>,
           you&rsquo;re curently holding{" "}
-          <b>{formattedBalance || "{amount}"} $GSLS</b>
+          <b>{(connected && formattedBalance) || "{amount}"} $GSLS</b>
         </p>
         <p className={styles.currentDelegate}>
           Your current delegate is: {delegate}

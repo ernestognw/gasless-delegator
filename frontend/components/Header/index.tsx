@@ -21,10 +21,10 @@ const Header = () => {
     if (!correctNetwork) {
       buttonProps.onClick = switchToCorrectNetwork;
       buttonProps.children = "Switch to correct network";
+    } else {
+      buttonProps.onClick = disconnectWallet;
+      buttonProps.children = "Disconnect";
     }
-
-    buttonProps.onClick = disconnectWallet;
-    buttonProps.children = "Disconnect";
   }
 
   return (

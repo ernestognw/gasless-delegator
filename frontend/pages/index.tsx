@@ -3,6 +3,8 @@ import Head from "next/head";
 import Header from "components/Header";
 import styles from "styles/Home.module.css";
 import Delegator from "components/Delegator";
+import { useWallet } from "@web3-ui/core";
+import { useEffect } from "react";
 
 const Home: NextPage = () => {
   return (
