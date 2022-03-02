@@ -43,7 +43,7 @@ Also uses [Defender Relay](https://docs.openzeppelin.com/defender/relay) to pay 
 
 ## Workflow
 
-1. Deploy an [ERC20Votes token](harhdhat)
+1. Deploy an [ERC20Votes token](hardhat)
 2. Claim some tokens of your contract (optional)
 3. Follow the [Autotask creation guid](autotask)
 4. [Run the UI](frontend)
