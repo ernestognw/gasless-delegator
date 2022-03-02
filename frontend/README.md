@@ -2,7 +2,7 @@
 
 An simple UI to provide a gasless redelegation for users on a token contract by using the `delegateBySig(delegatee, nonce, expiry, v, r, s)` function of the Open Zeppelin [ERC20Votes.sol](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20Votes).
 
-It uses an (EIP712 Typed Structured Data)[https://eips.ethereum.org/EIPS/eip-712] message to be signed by the user without paying for its actual execution.
+It uses an [EIP712 Typed Structured Data](https://eips.ethereum.org/EIPS/eip-712) message to be signed by the user without paying for its actual execution.
 
 ### Getting Started ⚙️
 
