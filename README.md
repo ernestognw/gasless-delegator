@@ -7,54 +7,39 @@ It uses an instance of the [ERC20Votes.sol](https://docs.openzeppelin.com/contra
 Also uses [Defender Relay](https://docs.openzeppelin.com/defender/relay) to pay for transactions on behalf of the users and [Defender Autotask](https://docs.openzeppelin.com/defender/autotasks) to automate relay execution.
 
 
-
-
-
-
-
-                                                                                          ┌─────────────┐
-                                                                                          │             │
-                                                                                          │ Subsidizer  │
-                                                                                          │             │
-                                                                                          └──────┬──────┘
-                                                                                                 │ ETH to fund
-                                                                                                 │ delegations
-                                                                    ┌────────────────────────────┼────────┐      ┌────────────────────────────────────────────────┐
-                                                                    │                            │        │      │                                                │
-                                                                    │                            │        │      │   pragma solidity 0.8.10;                      │
-                                                                    │                            │        │      │                                                │
-                                                                    │                            │        │      │   ...                                          │
-                                ┌────────┐    ┌──────────────┐      │  ┌──────────┐       ┌──────▼────┐   │      │                                                │
-                                │        │    │              ├──────┼──►          ├───────►           │   │      │   contract GaslessToken is ..., ERC20Votes {   │
-                                │  User  ├────►      UI      │      │  │ Autotask │       │  Relayer  ├───┼───┐  │     ...                                        │
-                                │        │    │              ◄──────┼──┤          ◄───────┤           │   │   │  │                                                │
-                                └────────┘    └───┬──────▲───┘      │  └──────────┘       └───────────┘   │   └──┼────►delegateBySig(...) {}                      │
-                                                  │      │          │                                     │      │                                                │
-                                                  │      │          │                                     │      │     ...                                        │
-                                                  │      │          │       OpenZeppelin Defender         │      │   }                                            │
-                                                  │      │          │                                     │      │                                                │
-                                                  │      │          └─────────────────────────────────────┘      └────────────────────────────────────────────────┘
-                                        Request   │      │ Return
-                                        EIP712    │      │ signed
-                                        signature │      │ typed data
-                                                  │      │
-                                                  │      │
-                                                  │      │
-                                              ┌───▼──────┴───┐
-                                              │              │
-                                              │    Wallet    │
-                                              │              │
-                                              └──────────────┘
-
-
-
-
-
-
-
-
-
-
+                                                              ┌─────────────┐
+                                                              │             │
+                                                              │ Subsidizer  │
+                                                              │             │
+                                                              └──────┬──────┘
+                                                                      │ ETH to fund
+                                                                      │ delegations
+                                        ┌────────────────────────────┼────────┐      ┌────────────────────────────────────────────────┐
+                                        │                            │        │      │                                                │
+                                        │                            │        │      │   pragma solidity 0.8.10;                      │
+                                        │                            │        │      │                                                │
+                                        │                            │        │      │   ...                                          │
+    ┌────────┐    ┌──────────────┐      │  ┌──────────┐       ┌──────▼────┐   │      │                                                │
+    │        │    │              ├──────┼──►          ├───────►           │   │      │   contract GaslessToken is ..., ERC20Votes {   │
+    │  User  ├────►      UI      │      │  │ Autotask │       │  Relayer  ├───┼───┐  │     ...                                        │
+    │        │    │              ◄──────┼──┤          ◄───────┤           │   │   │  │                                                │
+    └────────┘    └───┬──────▲───┘      │  └──────────┘       └───────────┘   │   └──┼────►delegateBySig(...) {}                      │
+                      │      │          │                                     │      │                                                │
+                      │      │          │                                     │      │     ...                                        │
+                      │      │          │       OpenZeppelin Defender         │      │   }                                            │
+                      │      │          │                                     │      │                                                │
+                      │      │          └─────────────────────────────────────┘      └────────────────────────────────────────────────┘
+            Request   │      │ Return
+            EIP712    │      │ signed
+            signature │      │ typed data
+                      │      │
+                      │      │
+                      │      │
+                  ┌───▼──────┴───┐
+                  │              │
+                  │    Wallet    │
+                  │              │
+                  └──────────────┘
 
 ## Workflow
 
