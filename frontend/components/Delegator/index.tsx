@@ -92,7 +92,6 @@ const Delegator = () => {
 
       const actualResponse = await res.json();
 
-      console.log(actualResponse);
       if (res.status === 200 && actualResponse.status != "error") {
         alert("Redelegation sent to relayer");
         setTransactionHash(JSON.parse(actualResponse.result).transactionHash);
