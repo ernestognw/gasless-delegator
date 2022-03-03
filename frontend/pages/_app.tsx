@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { Provider, NETWORKS } from "@web3-ui/core";
+import { Provider } from "@web3-ui/core";
 import { chainId } from "config/environment";
 
 function MyApp({ Component, pageProps }: AppProps) {
