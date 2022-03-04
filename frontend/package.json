@@ -3,12 +3,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/fix-web3-ui.js && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@web3-ui/core": "^0.6.1",
+    "@web3-ui/core": "^0.6.2",
     "ethers": "^5.5.4",
     "next": "12.0.10",
     "react": "17.0.2",

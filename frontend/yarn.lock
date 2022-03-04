@@ -1666,10 +1666,10 @@
   dependencies:
     "@walletconnect/window-getters" "^1.0.0"
 
-"@web3-ui/components@^0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@web3-ui/components/-/components-0.10.0.tgz#bd3f58a9e8fb43160ba16dc83cf277cc89f95ff0"
-  integrity sha512-sq5oMm8S2irGFzxi/USXO7spXgvn6uECtQOdme+KeFdCI7h5g/we3wvInO1pylxvJrIfGub6kthnYLt31vx+3g==
+"@web3-ui/components@^0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@web3-ui/components/-/components-0.10.1.tgz#322a1057d34263390861884f5c51d639eeda0676"
+  integrity sha512-ySLdP+VEvH+g0Cp93jsv8Zfcx0jyKoJ4bnSqoEwwhr6lkiEBzMRzsRK3PqP3kn3hh6hDuWhosAItRR7Y77dKAQ==
   dependencies:
     "@babel/runtime" "^7.16.7"
     "@chakra-ui/icons" "^1.1.1"
@@ -1678,23 +1678,23 @@
     "@emotion/styled" "^11"
     framer-motion "^4"
 
-"@web3-ui/core@^0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@web3-ui/core/-/core-0.6.1.tgz#28fafa825880382f38575955a22aef4a67b9a452"
-  integrity sha512-s9yw5AY2+AWSLFdp5W8BmblODjIAOhLmN0t1Z/gda1O2Uy2FtKyVMz3/DSMotdwzgAgb4NteWB3+xd7agTVOVQ==
+"@web3-ui/core@^0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@web3-ui/core/-/core-0.6.2.tgz#db2f3c362dbdbfbfb0d252305fd696652ccc83de"
+  integrity sha512-qSDs9BlAL7PeT5f0e8z+Wk5g20l2GxO43Kx35VYQLDG3VIcEiET8t6fAghshTe9skfw/pM3OXQhsINDzOrt9Sw==
   dependencies:
     "@babel/runtime" "^7.16.7"
     "@chakra-ui/react" "^1.7.2"
     "@emotion/react" "^11"
     "@emotion/styled" "^11"
-    "@web3-ui/components" "^0.10.0"
-    "@web3-ui/hooks" "^0.11.0"
+    "@web3-ui/components" "^0.10.1"
+    "@web3-ui/hooks" "^0.11.1"
     framer-motion "^4"
 
-"@web3-ui/hooks@^0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@web3-ui/hooks/-/hooks-0.11.0.tgz#ed50ef5e2a2262fe20370dd2dea97a6b01272c57"
-  integrity sha512-PYShglRmtNGsfvedQj548iPtdbpLPt/4q9C5fTK3tmk9MRlV3r5RwwkXE1rzjqcFTp3nYtlE8Xem0SbGgyNQbQ==
+"@web3-ui/hooks@^0.11.1":
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/@web3-ui/hooks/-/hooks-0.11.1.tgz#642a6c89529b60bb312b4bdc88ecc74b7c1688e8"
+  integrity sha512-ArezE9Ns1fE+HcxvcjvTi1NIDy6Wn0ceeTRwUyoI+WCbKauXcUAB7jdgkLtUFdDRm8OP66p7z3p1qvcJCqs8NA==
   dependencies:
     "@babel/runtime" "^7.16.7"
     "@walletconnect/web3-provider" "^1.6.6"
